@@ -36,12 +36,19 @@ footer {
 .current-standing{
   background-color: lightpink;
 }
-.latest-race{
-  background-color: lightpink;
+.current-standing-list{
+  display: grid;
+  grid-template-columns: 300px 300px 300px
 }
 .driver-img{
   width: 200px;
 }
+
+
+.latest-race{
+  background-color: lightpink;
+}
+
 /* 2022 season team colors */
 /* Mercedes	#00D2BE	0,210,90 */
 .mercedes {

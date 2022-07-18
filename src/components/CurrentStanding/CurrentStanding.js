@@ -28,7 +28,7 @@ const CurrentStanding = ({ lastRound }) => {
             {currentStanding && 
                 <>
                     <h2>Current Standing as of round {lastRound}</h2>
-                    <ol>
+                    <ol className="current-standing-list">
                     {currentStanding.map((driver, idx) => {
                         return (
                             <li key = {idx} className={driver.Constructors[0].constructorId}>

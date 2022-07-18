@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import Countdown from "react-countdown";
 
-const CountDownToNextRace = ( { latestLoading, lastRound}) => {
+const CountDownToNextRace = ( { lastRound}) => {
     const [nextRound, setNextRound] = useState(null);
     const [loading, setLoading] = useState(false);
     useEffect(()=> {

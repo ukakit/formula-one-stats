@@ -34,7 +34,7 @@ const Home = () => {
             <h1>Hello from home</h1>
             <CurrentStanding lastRound={lastRound}/>
             <LatestRace result={result} latestLoading={latestLoading}/>
-            <CountDownToNextRace latestLoading={latestLoading} lastRound={lastRound}/>
+            <CountDownToNextRace lastRound={lastRound}/>
         </>
     );
 };

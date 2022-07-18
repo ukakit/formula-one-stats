@@ -14,8 +14,8 @@ code {
 
 .App {
   display: grid;
-  height: 100vh;
-  grid-template-rows: 100px 1fr 100px;
+  /* height: 100vh; */
+  grid-template-rows: 50px 1fr 50px;
 }
 
 nav {
@@ -33,11 +33,16 @@ footer {
 * {
   border: 1px solid black
 }
-.latest-race{
-  background-color: pink;
+.current-standing{
+  background-color: lightpink;
 }
-
-
+.latest-race{
+  background-color: lightpink;
+}
+.driver-img{
+  width: 200px;
+}
+/* 2022 season team colors */
 /* Mercedes	#00D2BE	0,210,90 */
 .mercedes {
   color: #00D2BE;
@@ -50,10 +55,32 @@ footer {
 .red_bull{
   color: #0600EF;	
 }
-/* Alpine	#0090FF	0,144,255
-Haas	#FFFFFF	255,255,255
-Aston Martin	#006F62	0,111,98
-AlphaTauri	#2B4562	43,69,98
-McLaren	#FF8700	255,135,0
-Alfa Romeo Racing	#900000	144,0,0
-Williams	#005AFF	0,90,255 */
+/* Alpine	#0090FF	0,144,255 */
+.alpine {
+  color: #0090ff;
+}
+/* Haas	#FFFFFF	255,255,255 */
+.haas{
+  color: #FFFFFF
+}
+/* AlphaTauri	#2B4562	43,69,98 */
+.alphatauri{
+  color: #2B4562
+}
+/* Aston Martin	#006F62	0,111,98 */
+.aston_martin{
+  color: #006F62
+}
+
+/* McLaren	#FF8700	255,135,0 */
+.mclaren{
+  color: #FF8700
+}
+/* Alfa Romeo Racing	#900000	144,0,0 */
+.alfa{
+  color: #900000
+}
+/* Williams	#005AFF	0,90,255 */
+.williams{
+  color: #005AFF
+}

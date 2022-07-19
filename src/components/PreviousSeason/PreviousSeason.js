@@ -60,7 +60,7 @@ const PreviousSeason = () => {
                 </>
             }
             {/* React BootStrap nav bar */}
-            <Navbar bg="light" expand="lg">
+            <Navbar expand="lg">
                 <Container>
                     <Navbar.Brand>Previous Season Race Results Inquiry</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />

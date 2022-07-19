@@ -34,11 +34,11 @@ const CurrentStanding = () => {
             {currentStanding && 
                 <>
                     <h2>Current Drivers' Standing as of Round {lastRound}</h2>
-                    <Row sm={3} md={4} lg={5}>
+                    <Row xs={3} md={4} lg={6}>
                     {currentStanding.map((driver, idx) => {
                         return (
-                            <Col>
-                                <Card>
+                            <Col key={idx}>
+                                <Card bg='light' border='dark'>
                                     <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/assets/22-drivers/${driver.Driver.permanentNumber}.png`}/>
                                     <Card.Body>
                                         <Card.Title>{driver.position}. {driver.Driver.givenName} {driver.Driver.familyName}</Card.Title>

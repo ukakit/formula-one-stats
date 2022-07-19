@@ -1,5 +1,6 @@
 import logo from "./logo-red-f1.svg"
 import { Route, Routes } from "react-router-dom"
+import github from "./github.svg"
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -28,7 +29,7 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <main>
+      <main className='main-container'>
         <Routes>
           <Route path="/" element={<Home/>} />
           <Route path="/2022" element={<CurrentSeason/>} />
@@ -39,7 +40,19 @@ function App() {
       </main>
       <footer>
         {/* <img src="" alt=""></img> */}
-        <p>Disclaimer: This website is for education purposes only</p>
+        <Navbar bg="light" expand="lg" role='footer' sticky="bottom">
+          <Container>
+              <Nav className="me-auto">
+                <Nav.Link 
+                  href="https://github.com/ukakit/formula-one-stats" 
+                  target='_blank'
+                  rel="noreferrer">
+                    <img alt="github-logo" src={github}></img>
+                </Nav.Link>
+                <Navbar.Text>Disclaimer: This website is for education purposes only</Navbar.Text>
+              </Nav>
+        </Container>
+      </Navbar>
       </footer>
     </div>
   );

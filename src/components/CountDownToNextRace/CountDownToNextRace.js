@@ -22,7 +22,7 @@ const CountDownToNextRace = ( { lastRound}) => {
     
     }, [lastRound])
     const renderer = ({ days, hours, minutes, seconds }) => {
-        return <h3>{`${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`}</h3>
+        return <h3 className='countdown-text'>{`${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`}</h3>
     }
     return (
         <div className="countdown">

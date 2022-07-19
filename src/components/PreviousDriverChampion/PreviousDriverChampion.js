@@ -42,7 +42,7 @@ const PreviousDriverChampion = () => {
                 </>
             }
             {/* React BootStrap nav bar */}
-            <Navbar bg="light" expand="lg">
+            <Navbar expand="lg">
                 <Container>
                     <Navbar.Brand>Previous World Drivers' Champion Inquiry</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />

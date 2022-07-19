@@ -31,10 +31,10 @@ const Home = () => {
     }, [])
     return (
         <>
-            <h1>Hello from home</h1>
-            <CurrentStanding lastRound={lastRound}/>
-            <LatestRace result={result} latestLoading={latestLoading}/>
+            <h1>Welcome to F1 Stats</h1>
             <CountDownToNextRace lastRound={lastRound}/>
+            <CurrentStanding />
+            <LatestRace result={result} latestLoading={latestLoading}/>
         </>
     );
 };

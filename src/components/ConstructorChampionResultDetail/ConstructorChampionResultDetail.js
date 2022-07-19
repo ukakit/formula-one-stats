@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 import Table from 'react-bootstrap/Table';
 
-const RaceResultDetail = ({season, round}) => {
+const ConstructorChampionResultDetail = ({season}) => {
     const [detail, setDetail] = useState(null);
     const [loading, setLoading] = useState(false);
     useEffect( () => {
         setLoading(true);
-        fetch(`https://ergast.com/api/f1/${season}/${round}/results.json`)
+        fetch(`https://ergast.com/api/f1/${season}/constructorStandings.json`)
         .then(res => {
             if (res.status === 404) {
 				// describe 404 error in error state
@@ -19,44 +19,36 @@ const RaceResultDetail = ({season, round}) => {
                 return res.json();
             }})
         .then(data => {
-            setDetail(data.MRData.RaceTable.Races[0])
+            setDetail(data.MRData.StandingsTable.StandingsLists[0])
             setLoading(false)
         })
         .catch(console.error);
-    }, [season, round])
+    }, [season])
     return (
         <div className="query-result">
             {loading && 'Loading results...'}
             {detail &&
                 <>
-                    <h1>{detail.season} {detail.raceName}</h1>
+                    <h1>{detail.season}</h1>
                     <Table striped bordered hover>
                         <thead>
                             <tr>
                                 <th>Position</th>
-                                <th>Starting Grid</th>
-                                <th>No</th>
-                                <th>Driver</th>
                                 <th>Constructor</th>
-                                <th>Laps</th>
-                                <th>Time</th>
-                                <th>Status</th>
-                                <th>Points Gained</th>
+                                <th>Nationality</th>
+                                <th>End of Season Points</th>
+                                <th>Wins</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {detail.Results.map((result, idx) => {
+                            {detail.ConstructorStandings.map((constructor, idx) => {
                                 return(
                                     <tr key={idx}>
-                                        <td>{result.position}</td>
-                                        <td>{result.grid}</td>
-                                        <td>{result.number}</td>
-                                        <td>{result.Driver.givenName} {result.Driver.familyName}</td>
-                                        <td>{result.Constructor.name}</td>
-                                        <td>{result.laps}</td>
-                                        <td>{result.Time ? result.Time.time : ""}</td>
-                                        <td>{result.status}</td>
-                                        <td>{result.points}</td>
+                                        <td>{constructor.position}</td>
+                                        <td>{constructor.Constructor.name}</td>
+                                        <td>{constructor.Constructor.nationality}</td>
+                                        <td>{constructor.points}</td>
+                                        <td>{constructor.wins}</td>
                                     </tr>
                                 )
                             })}
@@ -68,4 +60,4 @@ const RaceResultDetail = ({season, round}) => {
     );
 };
 
-export default RaceResultDetail;
+export default ConstructorChampionResultDetail;

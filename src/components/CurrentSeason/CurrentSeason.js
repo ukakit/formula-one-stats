@@ -1,10 +1,12 @@
-import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
 import { useState, useEffect } from "react";
 import RaceResultDetail from '../RaceResultDetail/RaceResultDetail';
+import Spinner from 'react-bootstrap/Spinner';
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 
-
-const CurrentSeasonDetail = () => {
+const CurrentSeason = () => {
     const [dropdownValue, setDropdownValue] = useState("")
     const [schedule, setSchedule] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -30,18 +32,31 @@ const CurrentSeasonDetail = () => {
     }
     return (
         <>
-            {loading && 'Loading results...'}
-            {schedule && 
-                <DropdownButton 
-                id="dropdown-basic-button" 
-                title="Round"
-                onSelect={handleSelect}
-                >
-                    {schedule.map((race , idx) => {
-                        return <Dropdown.Item key={idx} eventKey={race.round}>{race.raceName}</Dropdown.Item>
-                    })}
-                </DropdownButton>
+            {loading && 
+                <>
+                    <Spinner animation="border" role="status">
+                        <span className="visually-hidden">Loading...</span>
+                    </Spinner>
+                </>
             }
+            {/* React BootStrap nav bar */}       
+            <Navbar bg="light" expand="lg">
+                <Container>
+                    <Navbar.Brand>2022 Season Race Results Inquiry</Navbar.Brand>
+                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+                    <Navbar.Collapse id="basic-navbar-nav">
+                        <Nav className="me-auto">
+                            {schedule && 
+                                <NavDropdown title="Round" id="nav-dropdown" onSelect={handleSelect}>
+                                {schedule.map((race , idx) => {
+                                    return <NavDropdown.Item key={idx} eventKey={race.round}>{race.raceName}</NavDropdown.Item>
+                                })}
+                            </NavDropdown>
+                            }
+                        </Nav>
+                    </Navbar.Collapse>
+                </Container>
+            </Navbar>
             {dropdownValue ?
             <RaceResultDetail season={2022} round={dropdownValue} />
             :
@@ -50,4 +65,5 @@ const CurrentSeasonDetail = () => {
       );
 };
 
-export default CurrentSeasonDetail;
+
+export default CurrentSeason;

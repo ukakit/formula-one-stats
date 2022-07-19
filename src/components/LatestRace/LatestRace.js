@@ -1,7 +1,9 @@
+import Table from 'react-bootstrap/Table';
+
 const LatestRace = ({ result, latestLoading }) => {
     return (
         <div className="latest-race">
-            <h1>Latest Race Result</h1>
+            <h2>Latest Race Result</h2>
             {latestLoading && 'Loading results...'}
             {result &&
                 <>
@@ -12,14 +14,26 @@ const LatestRace = ({ result, latestLoading }) => {
                     >
                         {result.season} {result.raceName}
                     </a>
-                    <ol>
-                        {result.Results.map((position, idx) => {
-                            return (<li key = {idx} className={position.Constructor.constructorId}>{`${position.Driver.givenName} ${position.Driver.familyName}`}</li>)
-                        })}
-                        {/* <li className={result.Results[0].Constructor.constructorId}>{`${result.Results[0].Driver.givenName} ${result.Results[0].Driver.familyName}`}</li>
-                        <li className={result.Results[1].Constructor.constructorId}>{`${result.Results[1].Driver.givenName} ${result.Results[1].Driver.familyName}`}</li>
-                        <li className={result.Results[2].Constructor.constructorId}>{`${result.Results[2].Driver.givenName} ${result.Results[2].Driver.familyName}`}</li> */}
-                    </ol>
+                    <Table bordered hover className="latest-race-table">
+                        <thead>
+                            <tr>
+                                <th>Pos</th>
+                                <th>Driver</th>
+                                <th>Points</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {result.Results.map((position, idx) => {
+                                return (
+                                <tr key = {idx}>
+                                    <td>{position.position}</td>
+                                    <td>{`${position.Driver.givenName} ${position.Driver.familyName}`}</td>
+                                    <td>{position.points}</td>
+                                </tr>
+                                )
+                            })}
+                        </tbody>
+                    </Table>
                 </>
             }
         </div>

@@ -1,6 +1,11 @@
 import { useState, useEffect } from "react";
-const CurrentStanding = ({ lastRound }) => {
+import Card from 'react-bootstrap/Card';
+import Col from 'react-bootstrap/Col';
+import Row from 'react-bootstrap/Row';
+
+const CurrentStanding = () => {
     const [currentStanding, setCurrentStanding] = useState(null);
+    const [lastRound, setLastRound] = useState(null)
     const [loading, setLoading] = useState(false);
     useEffect(() => {
         setLoading(true);
@@ -18,6 +23,7 @@ const CurrentStanding = ({ lastRound }) => {
             }})
         .then(data => {
             setCurrentStanding(data.MRData.StandingsTable.StandingsLists[0].DriverStandings)
+            setLastRound(data.MRData.StandingsTable.StandingsLists[0].round)
             setLoading(false)
         })
         .catch(console.error);
@@ -27,16 +33,23 @@ const CurrentStanding = ({ lastRound }) => {
             {loading && 'Loading results...'}
             {currentStanding && 
                 <>
-                    <h2>Current Standing as of round {lastRound}</h2>
-                    <ol className="current-standing-list">
+                    <h2>Current Drivers' Standing as of Round {lastRound}</h2>
+                    <Row sm={3} md={4} lg={5}>
                     {currentStanding.map((driver, idx) => {
                         return (
-                            <li key = {idx} className={driver.Constructors[0].constructorId}>
-                                {driver.points} pts {driver.Driver.givenName} {driver.Driver.familyName} <br></br><img className="driver-img" src={`${process.env.PUBLIC_URL}/assets/22-drivers/${driver.Driver.permanentNumber}.png`} alt=""></img>
-                            </li>
-                        )})
-                    }
-                    </ol>
+                            <Col>
+                                <Card>
+                                    <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/assets/22-drivers/${driver.Driver.permanentNumber}.png`}/>
+                                    <Card.Body>
+                                        <Card.Title>{driver.position}. {driver.Driver.givenName} {driver.Driver.familyName}</Card.Title>
+                                        <Card.Text>
+                                            {driver.points} pts
+                                        </Card.Text>
+                                    </Card.Body>
+                                </Card>
+                            </Col>
+                        )})}
+                    </Row>
                 </>
             }
         </div>

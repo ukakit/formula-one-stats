@@ -13,17 +13,27 @@ code {
 }
 
 .App {
-  display: grid;
-  /* height: 100vh; */
-  grid-template-rows: 50px 1fr 50px;
+  /* display: grid; */
+  /* grid-template-rows: 50px 1fr 50px; */
 }
 
-nav {
+/* nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+} */
 
+nav a{
+  text-decoration: none;
+  color:black;
+}
+nav a:hover{
+  color:red;
 }
 
 main {
-
+  padding: 0 2rem;
 }
 
 footer {
@@ -31,63 +41,37 @@ footer {
 }
 
 * {
-  border: 1px solid black
+  /* border: 1px solid black */
 }
 .current-standing{
-  background-color: lightpink;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.current-standing-list{
-  display: grid;
-  grid-template-columns: 300px 300px 300px
+.current-standing div.row{
+  /* --bs-gutter-x: 0; */
 }
+
+.query-result{
+  padding: 4rem;
+}
+
 .driver-img{
   width: 200px;
 }
 
-
+.dropdown-menu.show{
+  max-height: 30vh;
+  overflow: scroll;
+}
 .latest-race{
-  background-color: lightpink;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* 2022 season team colors */
-/* Mercedes	#00D2BE	0,210,90 */
-.mercedes {
-  color: #00D2BE;
-}
-/* Ferrari	#DC0000	220,0,0 */
-.ferrari {
-  color: #DC0000;
-}
-/* Red Bull Racing	#0600EF	6,0,239 */
-.red_bull{
-  color: #0600EF;	
-}
-/* Alpine	#0090FF	0,144,255 */
-.alpine {
-  color: #0090ff;
-}
-/* Haas	#FFFFFF	255,255,255 */
-.haas{
-  color: #FFFFFF
-}
-/* AlphaTauri	#2B4562	43,69,98 */
-.alphatauri{
-  color: #2B4562
-}
-/* Aston Martin	#006F62	0,111,98 */
-.aston_martin{
-  color: #006F62
-}
-
-/* McLaren	#FF8700	255,135,0 */
-.mclaren{
-  color: #FF8700
-}
-/* Alfa Romeo Racing	#900000	144,0,0 */
-.alfa{
-  color: #900000
-}
-/* Williams	#005AFF	0,90,255 */
-.williams{
-  color: #005AFF
+.countdown{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

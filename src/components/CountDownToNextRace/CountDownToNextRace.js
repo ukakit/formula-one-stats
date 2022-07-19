@@ -21,14 +21,16 @@ const CountDownToNextRace = ( { lastRound}) => {
         .catch(console.error);
     
     }, [lastRound])
-    
+    const renderer = ({ days, hours, minutes, seconds }) => {
+        return <h3>{`${days} days ${hours} hours ${minutes} minutes ${seconds} seconds`}</h3>
+    }
     return (
         <div className="countdown">
             {loading && 'Loading results...'}
             {nextRound && 
             <>
             <h2>Countdown to Next Race - {nextRound.raceName}</h2>
-            <Countdown date={`${nextRound.date}T${nextRound.time}`} />
+            <Countdown renderer={renderer} date={`${nextRound.date}T${nextRound.time}`} />
             </>
             }
         </div>

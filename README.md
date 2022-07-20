@@ -8,7 +8,7 @@ This project is created using React, with the use of Hooks and styled with React
 Data is sourced from an open API that provides data for the Formula One series (https://ergast.com/mrd/)
 
 ## Installation instructions
-To develop, run npm install to install all dependencies and npm start to start the server. To view the live app, please see [here]() for the deployed link.
+To develop, run npm install to install all dependencies and npm start to start the server. To view the live app, please see [here](https://formula-one-stats-ukk.netlify.app/) for the deployed link.
 
 ## Planning
 

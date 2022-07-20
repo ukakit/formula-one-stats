@@ -1,17 +1,19 @@
 import { useState, useEffect } from "react";
 import RaceResultDetail from '../RaceResultDetail/RaceResultDetail';
 import Spinner from 'react-bootstrap/Spinner';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import Box from '@mui/material/Box';
 
 const PreviousSeason = () => {
     const [seasonsDropdownValue, setSeasonsDropdownValue] = useState(2021)
     const [racesDropdownValue, setRacesDropdownValue] = useState(1)
-    const [season, setSeason] = useState(null);
-    const [races, setRaces] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [listOfSeasons, setListOfSeasons] = useState([])
+    const [listOfRaces, setListOfRaces] = useState([])
+
+
     useEffect(()=> {
         setLoading(true)
         fetch("https://ergast.com/api/f1/seasons.json?limit=200")
@@ -23,7 +25,7 @@ const PreviousSeason = () => {
                 return res.json();
             }})
         .then(data => {
-            setSeason(data.MRData.SeasonTable.Seasons.reverse().filter(season => season.season !== "2022"))
+            setListOfSeasons(data.MRData.SeasonTable.Seasons.reverse().filter(season => season.season !== "2022").map(season => season.season))
             setLoading(false)
         })
         .catch(console.error);
@@ -38,20 +40,13 @@ const PreviousSeason = () => {
                     return res.json();
                 }})
                 .then(data => {
-                    setRaces(data.MRData.RaceTable.Races)
+                    setListOfRaces(data.MRData.RaceTable.Races.map(race => race.raceName))
                 })
                 .catch(console.error);
         }, [seasonsDropdownValue])
-            
-    const handleSeasonSelect = (e) => {
-        setSeasonsDropdownValue(e)
-    }
-    const handleRaceSelect = (e) => {
-        setRacesDropdownValue(e)
-    }
 
     return (
-        <div className="previous-season">
+        <div className="query-container">
             {loading && 
                 <>
                     <Spinner animation="border" role="status">
@@ -59,39 +54,28 @@ const PreviousSeason = () => {
                     </Spinner>
                 </>
             }
-            {/* React BootStrap nav bar */}
-            <Navbar expand="lg">
-                <Container>
-                    <Navbar.Brand>Previous Season Race Results Inquiry</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto">
-                            {season && 
-                                <NavDropdown 
-                                id="nav-dropdown"
-                                title="Season"
-                                onSelect={handleSeasonSelect}
-                                >
-                                    {season.map((season , idx) => {
-                                        return <NavDropdown.Item key={idx} eventKey={season.season}>{season.season}</NavDropdown.Item>
-                                    })}
-                                </NavDropdown>
-                            }
-                            {races && 
-                                <NavDropdown 
-                                id="nav-dropdown" 
-                                title="Round"
-                                onSelect={handleRaceSelect}
-                                >
-                                    {races.map((race , idx) => {
-                                        return <NavDropdown.Item key={idx} eventKey={race.round}>{race.raceName}</NavDropdown.Item>
-                                    })}
-                                </NavDropdown>
-                            }
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
+            <Box sx={{"display":"flex", flexDirection: "column", alignItems:"center"}}>
+                <h2 className="header">Previous Season Race Results Inquiry</h2>
+                <Autocomplete
+                    disablePortal
+                    options={listOfSeasons}
+                    sx={{ width: 300, maxWidth: "80%"}}
+                    onChange={(event, newValue) => {
+                        setSeasonsDropdownValue(newValue);
+                    }}
+                    renderInput={(params) => <TextField {...params} label="Season" />}
+                />
+                <Autocomplete
+                    disablePortal
+                    options={listOfRaces}
+                    sx={{ width: 300, maxWidth: "80%"}}
+                    onChange={(event, newValue) => {
+                        setRacesDropdownValue(listOfRaces.indexOf(newValue)+1);
+                    }}
+                    renderInput={(params) => <TextField {...params} label="Race" />}
+                />
+            </Box>
+
             {seasonsDropdownValue &&
                 <RaceResultDetail season={seasonsDropdownValue} round={racesDropdownValue} />
             }

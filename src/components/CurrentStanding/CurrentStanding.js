@@ -34,7 +34,7 @@ const CurrentStanding = () => {
             {currentStanding && 
                 <>
                     <h2>Current Drivers' Standing as of Round {lastRound}</h2>
-                    <Row xs={3} md={4} lg={6}>
+                    <Row xs={2} sm={3} md={4} lg={6}>
                     {currentStanding.map((driver, idx) => {
                         return (
                             <Col key={idx}>

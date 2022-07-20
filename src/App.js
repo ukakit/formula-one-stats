@@ -1,10 +1,13 @@
 import logo from "./logo.svg"
 import { Route, Routes } from "react-router-dom"
-import github from "./github.svg"
+
+import "./fonts/Formula1-Regular.ttf"
 
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
+import Fab from '@mui/material/Fab';
+import GitHubIcon from '@mui/icons-material/GitHub';
 
 import Home from './components/Home/Home';
 import CurrentSeason from './components/CurrentSeason/CurrentSeason';
@@ -41,17 +44,19 @@ function App() {
       <Navbar bg="light" expand="lg" fixed="bottom" as="footer">
         <Container>
             <Nav className="me-auto">
-              <Nav.Link 
-                href="https://github.com/ukakit/formula-one-stats" 
-                target='_blank'
-                rel="noreferrer">
-                  <img alt="github-logo" src={github}></img>
-              </Nav.Link>
-              <p className='footer-disclaimer'>Disclaimer: This website is for education purposes only. All Photos and rights relating to them, including copyright and ownership, remain the sole and exclusive property of F1.
+              <p className='footer-disclaimer'>Disclaimer: This website is for educational purposes only. All Photos and rights relating to them, including copyright and ownership, remain the sole and exclusive property of F1.
               </p>
             </Nav>
         </Container>
       </Navbar>
+      <Fab 
+        sx={{color:"red" , position: "fixed", right:0, top: "50%"}} 
+        aria-label="github" 
+        href="https://github.com/ukakit/formula-one-stats" 
+        target='_blank'
+        rel="noreferrer">
+        <GitHubIcon />
+      </Fab>
     </div>
   );
 }

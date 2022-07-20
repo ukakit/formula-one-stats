@@ -14,7 +14,7 @@ const LatestRace = ({ result, latestLoading }) => {
                     >
                         {result.season} {result.raceName}
                     </a>
-                    <Table bordered hover className="latest-race-table">
+                    <Table bordered hover className="latest-race-table" variant='light'>
                         <thead>
                             <tr>
                                 <th>Pos</th>

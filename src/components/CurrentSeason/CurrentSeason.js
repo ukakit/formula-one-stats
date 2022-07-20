@@ -10,6 +10,7 @@ const CurrentSeason = () => {
     const [dropdownValue, setDropdownValue] = useState("")
     const [schedule, setSchedule] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [totalRounds, setTotalRounds] = useState(0);
     useEffect(()=> {
         setLoading(true)
         fetch("https://ergast.com/api/f1/current.json")
@@ -22,6 +23,7 @@ const CurrentSeason = () => {
             }})
         .then(data => {
             setSchedule(data.MRData.RaceTable.Races)
+            setTotalRounds(data.MRData.RaceTable.Races.length)
             setLoading(false)
         })
         .catch(console.error);
@@ -58,7 +60,7 @@ const CurrentSeason = () => {
                 </Container>
             </Navbar>
             {dropdownValue ?
-            <RaceResultDetail season={2022} round={dropdownValue} />
+            <RaceResultDetail season={2022} round={parseInt(dropdownValue)} totalRounds={totalRounds} />
             :
             <h1>Select A Race From the Dropdown to See Race Results</h1>}
         </>

@@ -1,12 +1,14 @@
 import { useState, useEffect } from "react";
+import { Button } from "react-bootstrap";
 import Table from 'react-bootstrap/Table';
 
 const ConstructorChampionResultDetail = ({season}) => {
     const [detail, setDetail] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [seasonState, setSeasonState] = useState(season)
     useEffect( () => {
         setLoading(true);
-        fetch(`https://ergast.com/api/f1/${season}/constructorStandings.json`)
+        fetch(`https://ergast.com/api/f1/${seasonState}/constructorStandings.json`)
         .then(res => {
             if (res.status === 404) {
 				// describe 404 error in error state
@@ -23,14 +25,28 @@ const ConstructorChampionResultDetail = ({season}) => {
             setLoading(false)
         })
         .catch(console.error);
-    }, [season])
+    }, [seasonState])
+    const handlePreviousSeason = () => {
+        if (seasonState > 1950) {
+            setSeasonState(prev => prev -= 1)
+        }
+    }
+    const handleNextSeason = () => {
+        if (seasonState < 2021) {
+            setSeasonState(prev => prev += 1)
+        }
+    }
     return (
         <div className="query-result">
             {loading && 'Loading results...'}
             {detail &&
                 <>
-                    <h1>{detail.season}</h1>
-                    <Table striped bordered hover>
+                    <div className='table-nav'>
+                        <Button variant='outline-primary' onClick={handlePreviousSeason}>{"<"}</Button>
+                        <h1>{detail.season}</h1>
+                        <Button variant='outline-primary' onClick={handleNextSeason}>{">"}</Button>
+                    </div>
+                    <Table striped bordered hover variant='light'>
                         <thead>
                             <tr>
                                 <th>Position</th>

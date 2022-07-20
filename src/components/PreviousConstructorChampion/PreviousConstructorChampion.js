@@ -29,7 +29,7 @@ const PreviousConstructorChampion = () => {
     }, [])
             
     const handleSeasonSelect = (e) => {
-        setSeasonsDropdownValue(e)
+        setSeasonsDropdownValue(parseInt(e))
     }
 
     return (

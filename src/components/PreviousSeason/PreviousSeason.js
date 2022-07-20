@@ -92,10 +92,8 @@ const PreviousSeason = () => {
                     </Navbar.Collapse>
                 </Container>
             </Navbar>
-            {seasonsDropdownValue ?
+            {seasonsDropdownValue &&
                 <RaceResultDetail season={seasonsDropdownValue} round={racesDropdownValue} />
-            :
-                <h1>Select A Race From the Dropdown to See Race Results</h1>
             }
         </div>
       );

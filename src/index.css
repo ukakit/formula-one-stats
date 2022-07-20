@@ -7,53 +7,90 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.main-container {
+  padding: 4rem;
+  background-image: url('./bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 95vh;
 }
 
-.App {
-  display: grid;
-  height: 100vh;
-  grid-template-rows: 100px 1fr 100px;
+.main-container h1{
+  text-align: center;
 }
 
-nav {
-
+.footer-disclaimer{
+  font-size: 12px;
+  text-align: right;
+  margin: 0;
 }
 
-main {
-
+.countdown{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0
 }
 
-footer {
-
+.countdown-text{
+  color: rgb(255, 0, 0);
 }
 
-* {
-  border: 1px solid black
+.welcome-msg, .countdown h2, .current-standing h2, .latest-race h2{
+  color:white
+}
+.latest-race a{
+  color: white;
+  text-decoration: none;
+}
+
+.current-standing{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0;
+}
+
+.query-result{
+  padding-top: 4rem;
+}
+
+.driver-img{
+  width: 200px;
+}
+
+.dropdown-menu.show{
+  max-height: 30vh;
+  overflow: scroll;
 }
 .latest-race{
-  background-color: pink;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 2rem 0;
+}
+.previous-season{
+  background-color: white;
+}
+.current-season{
+  background-color: white;
+}
+.table-nav{
+  display: flex;
+  justify-content: space-evenly;
 }
 
 
-/* Mercedes	#00D2BE	0,210,90 */
-.mercedes {
-  color: #00D2BE;
+@media screen and (min-width: 768px) {
+  .card{
+    min-height: 285px;
+  }
 }
-/* Ferrari	#DC0000	220,0,0 */
-.ferrari {
-  color: #DC0000;
+
+@media screen and (min-width: 992px) {
+  .card{
+    min-height: 310px;
+  }
 }
-/* Red Bull Racing	#0600EF	6,0,239 */
-.red_bull{
-  color: #0600EF;	
-}
-/* Alpine	#0090FF	0,144,255
-Haas	#FFFFFF	255,255,255
-Aston Martin	#006F62	0,111,98
-AlphaTauri	#2B4562	43,69,98
-McLaren	#FF8700	255,135,0
-Alfa Romeo Racing	#900000	144,0,0
-Williams	#005AFF	0,90,255 */

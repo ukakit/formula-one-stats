@@ -33,7 +33,7 @@ const PreviousDriverChampion = () => {
     }
 
     return (
-        <div className="previous-season">
+        <div className="query-container">
             {loading && 
                 <>
                     <Spinner animation="border" role="status">

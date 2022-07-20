@@ -27,9 +27,10 @@ const RaceResultDetail = ({season, round}) => {
     return (
         <div className="query-result">
             {loading && 'Loading results...'}
-            {detail &&
+            {detail ?
                 <>
                     <h1>{detail.season} {detail.raceName}</h1>
+                    <h2>{detail.Circuit.circuitName} - {detail.date}</h2>
                     <Table striped bordered hover responsive variant="light">
                         <thead>
                             <tr>
@@ -62,6 +63,10 @@ const RaceResultDetail = ({season, round}) => {
                             })}
                         </tbody>
                     </Table>
+                </>
+                :
+                <>
+                <h1>No Data</h1>
                 </>
             }
         </div>

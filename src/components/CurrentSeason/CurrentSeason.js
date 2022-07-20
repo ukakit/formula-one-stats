@@ -1,16 +1,17 @@
 import { useState, useEffect } from "react";
 import RaceResultDetail from '../RaceResultDetail/RaceResultDetail';
 import Spinner from 'react-bootstrap/Spinner';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import Box from '@mui/material/Box';
+
 
 const CurrentSeason = () => {
-    const [dropdownValue, setDropdownValue] = useState("")
-    const [schedule, setSchedule] = useState(null);
     const [loading, setLoading] = useState(false);
     const [totalRounds, setTotalRounds] = useState(0);
+    const [listOfRaces, setListOfRaces] = useState([])
+    const [value, setValue] = useState(null);
+
     useEffect(()=> {
         setLoading(true)
         fetch("https://ergast.com/api/f1/current.json")
@@ -22,18 +23,15 @@ const CurrentSeason = () => {
                 return res.json();
             }})
         .then(data => {
-            setSchedule(data.MRData.RaceTable.Races)
+            setListOfRaces(data.MRData.RaceTable.Races.map(race => race.raceName))
             setTotalRounds(data.MRData.RaceTable.Races.length)
             setLoading(false)
         })
         .catch(console.error);
     
     }, [])
-    const handleSelect = (e) => {
-        setDropdownValue(e)
-    }
     return (
-        <div className="current-season">
+        <div className="query-container">
             {loading && 
                 <>
                     <Spinner animation="border" role="status">
@@ -41,28 +39,22 @@ const CurrentSeason = () => {
                     </Spinner>
                 </>
             }
-            {/* React BootStrap nav bar */}       
-            <Navbar expand="lg">
-                <Container>
-                    <Navbar.Brand>2022 Season Race Results Inquiry</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto">
-                            {schedule && 
-                                <NavDropdown title="Round" id="nav-dropdown" onSelect={handleSelect}>
-                                {schedule.map((race , idx) => {
-                                    return <NavDropdown.Item key={idx} eventKey={race.round}>{race.raceName}</NavDropdown.Item>
-                                })}
-                            </NavDropdown>
-                            }
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-            {dropdownValue ?
-            <RaceResultDetail season={2022} round={parseInt(dropdownValue)} totalRounds={totalRounds} />
+            <Box sx={{"display":"flex", flexDirection: "column", alignItems:"center"}}>
+                <h2 className="header">2022 Season Race Results Inquiry</h2>
+                <Autocomplete
+                    disablePortal
+                    options={listOfRaces}
+                    sx={{ width: 300, maxWidth: "80%"}}
+                    onChange={(event, newValue) => {
+                        setValue(listOfRaces.indexOf(newValue)+1);
+                    }}
+                    renderInput={(params) => <TextField {...params} label="Round" />}
+                    />
+            </Box>
+            {value ?
+            <RaceResultDetail season={2022} round={parseInt(value)} totalRounds={totalRounds} />
             :
-            <h1>Select A Race From the Dropdown to See Race Results</h1>}
+            <h1 className="pending-selection-text">Select A Race From the Dropdown to See Race Results</h1>}
         </div>
       );
 };

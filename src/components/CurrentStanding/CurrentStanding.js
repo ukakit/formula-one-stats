@@ -41,9 +41,9 @@ const CurrentStanding = () => {
                                 <Card bg='light' border='dark'>
                                     <Card.Img variant="top" src={`${process.env.PUBLIC_URL}/assets/22-drivers/${driver.Driver.permanentNumber}.png`}/>
                                     <Card.Body>
-                                        <Card.Title>{driver.position}. {driver.Driver.givenName} {driver.Driver.familyName}</Card.Title>
+                                        <Card.Title>{driver.points} pts</Card.Title>
                                         <Card.Text>
-                                            {driver.points} pts
+                                            {driver.position}. {driver.Driver.givenName} {driver.Driver.familyName}
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>

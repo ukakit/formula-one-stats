@@ -46,7 +46,7 @@ const DriverChampionResultDetail = ({season}) => {
                         <h1>{detail.season}</h1>
                         <Button variant='outline-primary' onClick={handleNextSeason}>{">"}</Button>
                     </div>
-                    <Table striped bordered hover variant='light'>
+                    <Table striped bordered hover responsive variant='light'>
                         <thead>
                             <tr>
                                 <th>Position</th>

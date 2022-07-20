@@ -30,7 +30,7 @@ const RaceResultDetail = ({season, round}) => {
             {detail &&
                 <>
                     <h1>{detail.season} {detail.raceName}</h1>
-                    <Table striped bordered hover>
+                    <Table striped bordered hover responsive variant="light">
                         <thead>
                             <tr>
                                 <th>Position</th>

@@ -31,7 +31,7 @@ const Home = () => {
     }, [])
     return (
         <>
-            <h1>Welcome to F1 Stats</h1>
+            <h1 className='welcome-msg'>Welcome to F1 Stats</h1>
             <CountDownToNextRace lastRound={lastRound}/>
             <CurrentStanding />
             <LatestRace result={result} latestLoading={latestLoading}/>

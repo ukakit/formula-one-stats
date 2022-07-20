@@ -8,11 +8,42 @@ body {
 }
 
 .main-container {
-  margin: 4rem 4rem 4rem 4rem;
+  padding: 4rem;
+  background-image: url('./bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 95vh;
 }
 
 .main-container h1{
   text-align: center;
+}
+
+.footer-disclaimer{
+  font-size: 12px;
+  text-align: right;
+  margin: 0;
+}
+
+.countdown{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 0
+}
+
+.countdown-text{
+  color: rgb(255, 0, 0);
+}
+
+.welcome-msg, .countdown h2, .current-standing h2, .latest-race h2{
+  color:white
+}
+.latest-race a{
+  color: white;
+  text-decoration: none;
 }
 
 .current-standing{
@@ -38,23 +69,19 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 2rem 0;
+  margin: 2rem 0;
 }
-
+.previous-season{
+  background-color: white;
+}
+.current-season{
+  background-color: white;
+}
 .table-nav{
   display: flex;
   justify-content: space-evenly;
 }
-.countdown{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 2rem 0
-}
 
-.countdown-text{
-  color: rgb(255, 0, 0);
-}
 
 @media screen and (min-width: 768px) {
   .card{

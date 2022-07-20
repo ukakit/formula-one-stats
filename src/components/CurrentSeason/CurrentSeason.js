@@ -33,7 +33,7 @@ const CurrentSeason = () => {
         setDropdownValue(e)
     }
     return (
-        <>
+        <div className="current-season">
             {loading && 
                 <>
                     <Spinner animation="border" role="status">
@@ -63,7 +63,7 @@ const CurrentSeason = () => {
             <RaceResultDetail season={2022} round={parseInt(dropdownValue)} totalRounds={totalRounds} />
             :
             <h1>Select A Race From the Dropdown to See Race Results</h1>}
-        </>
+        </div>
       );
 };
 

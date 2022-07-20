@@ -1,4 +1,4 @@
-import logo from "./logo-red-f1.svg"
+import logo from "./logo.svg"
 import { Route, Routes } from "react-router-dom"
 import github from "./github.svg"
 
@@ -38,22 +38,20 @@ function App() {
           <Route path="/constructors-champion" element={<PreviousConstructorChampion />} />
         </Routes>
       </main>
-      <footer>
-        {/* <img src="" alt=""></img> */}
-        <Navbar bg="light" expand="lg" role='footer' sticky="bottom">
-          <Container>
-              <Nav className="me-auto">
-                <Nav.Link 
-                  href="https://github.com/ukakit/formula-one-stats" 
-                  target='_blank'
-                  rel="noreferrer">
-                    <img alt="github-logo" src={github}></img>
-                </Nav.Link>
-                <Navbar.Text>Disclaimer: This website is for education purposes only</Navbar.Text>
-              </Nav>
+      <Navbar bg="light" expand="lg" fixed="bottom" as="footer">
+        <Container>
+            <Nav className="me-auto">
+              <Nav.Link 
+                href="https://github.com/ukakit/formula-one-stats" 
+                target='_blank'
+                rel="noreferrer">
+                  <img alt="github-logo" src={github}></img>
+              </Nav.Link>
+              <p className='footer-disclaimer'>Disclaimer: This website is for education purposes only. All Photos and rights relating to them, including copyright and ownership, remain the sole and exclusive property of F1.
+              </p>
+            </Nav>
         </Container>
       </Navbar>
-      </footer>
     </div>
   );
 }

@@ -9,12 +9,16 @@ const PreviousDriverChampion = () => {
     const [seasonsDropdownValue, setSeasonsDropdownValue] = useState(2021)
     const [loading, setLoading] = useState(false);
     const [listOfSeasons, setListOfSeasons] = useState([])
-
+    const [error, setError] = useState(null);
+    // API call to get list of seasons
     useEffect(()=> {
         setLoading(true)
         fetch("https://ergast.com/api/f1/seasons.json?limit=200")
         .then(res => {
-            if (res.status === 404) {
+            if (res.status === 502) {
+                setError(
+					'Server Error, please try again later'
+				);
                 setLoading(false)
                 return;
             } else if (res.status === 200) {
@@ -38,15 +42,20 @@ const PreviousDriverChampion = () => {
             }
             <Box sx={{"display":"flex", flexDirection: "column", alignItems:"center"}}>
                 <h2 className="header">Previous World Drivers' Champion Inquiry</h2>
-                <Autocomplete
-                    disablePortal
-                    options={listOfSeasons}
-                    sx={{ width: 300, maxWidth: "80%", py:1}}
-                    onChange={(event, newValue) => {
-                        setSeasonsDropdownValue(newValue);
-                    }}
-                    renderInput={(params) => <TextField {...params} label="Season" />}
-                />
+                {error 
+                ?
+                    <h2>{error}</h2>
+                :
+                    <Autocomplete
+                        disablePortal
+                        options={listOfSeasons}
+                        sx={{ width: 300, maxWidth: "80%", py:1}}
+                        onChange={(event, newValue) => {
+                            setSeasonsDropdownValue(newValue);
+                        }}
+                        renderInput={(params) => <TextField {...params} label="Season" />}
+                    />
+                }
             </Box>
 
             {seasonsDropdownValue &&

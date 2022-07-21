@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
 import ConstructorChampionResultDetail from "../ConstructorChampionResultDetail/ConstructorChampionResultDetail";
 import Spinner from 'react-bootstrap/Spinner';
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import TextField from '@mui/material/TextField';
+import Autocomplete from '@mui/material/Autocomplete';
+import Box from '@mui/material/Box';
 
 const PreviousConstructorChampion = () => {
     const [seasonsDropdownValue, setSeasonsDropdownValue] = useState(2021)
-    const [season, setSeason] = useState(null);
     const [loading, setLoading] = useState(false);
+    const [listOfSeasons, setListOfSeasons] = useState([])
+
     useEffect(()=> {
         setLoading(true)
         fetch("https://ergast.com/api/f1/seasons.json?limit=200")
@@ -21,16 +21,11 @@ const PreviousConstructorChampion = () => {
                 return res.json();
             }})
         .then(data => {
-            setSeason(data.MRData.SeasonTable.Seasons.reverse().filter(season => season.season !== "2022"))
+            setListOfSeasons(data.MRData.SeasonTable.Seasons.reverse().filter(season => season.season !== "2022").map(season => season.season))
             setLoading(false)
         })
         .catch(console.error);
-    
     }, [])
-            
-    const handleSeasonSelect = (e) => {
-        setSeasonsDropdownValue(parseInt(e))
-    }
 
     return (
         <div className="query-container">
@@ -41,32 +36,21 @@ const PreviousConstructorChampion = () => {
                     </Spinner>
                 </>
             }
-            {/* React BootStrap nav bar */}
-            <Navbar expand="lg">
-                <Container>
-                    <Navbar.Brand>Previous World Constructors' Champion Inquiry</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav">
-                        <Nav className="me-auto">
-                            {season && 
-                                <NavDropdown 
-                                id="nav-dropdown"
-                                title="Season"
-                                onSelect={handleSeasonSelect}
-                                >
-                                    {season.map((season , idx) => {
-                                        return <NavDropdown.Item key={idx} eventKey={season.season}>{season.season}</NavDropdown.Item>
-                                    })}
-                                </NavDropdown>
-                            }
-                        </Nav>
-                    </Navbar.Collapse>
-                </Container>
-            </Navbar>
-            {seasonsDropdownValue ?
+            <Box sx={{"display":"flex", flexDirection: "column", alignItems:"center"}}>
+                <h2 className="header">Previous World Constructors' Champion Inquiry</h2>
+                <Autocomplete
+                    disablePortal
+                    options={listOfSeasons}
+                    sx={{ width: 300, maxWidth: "80%", py:1}}
+                    onChange={(event, newValue) => {
+                        setSeasonsDropdownValue(newValue);
+                    }}
+                    renderInput={(params) => <TextField {...params} label="Season" />}
+                />
+            </Box>
+
+            {seasonsDropdownValue &&
                 <ConstructorChampionResultDetail season={seasonsDropdownValue}/>
-            :
-                <h1>Select A Season From the Dropdown to See Champion Result</h1>
             }
         </div>
       );

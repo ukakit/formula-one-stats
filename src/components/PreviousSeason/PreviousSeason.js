@@ -59,7 +59,7 @@ const PreviousSeason = () => {
                 <Autocomplete
                     disablePortal
                     options={listOfSeasons}
-                    sx={{ width: 300, maxWidth: "80%"}}
+                    sx={{ width: 300, maxWidth: "80%", py:1}}
                     onChange={(event, newValue) => {
                         setSeasonsDropdownValue(newValue);
                     }}
@@ -68,7 +68,7 @@ const PreviousSeason = () => {
                 <Autocomplete
                     disablePortal
                     options={listOfRaces}
-                    sx={{ width: 300, maxWidth: "80%"}}
+                    sx={{ width: 300, maxWidth: "80%", py:1}}
                     onChange={(event, newValue) => {
                         setRacesDropdownValue(listOfRaces.indexOf(newValue)+1);
                     }}

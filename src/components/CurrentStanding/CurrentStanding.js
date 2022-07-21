@@ -7,15 +7,15 @@ const CurrentStanding = () => {
     const [currentStanding, setCurrentStanding] = useState(null);
     const [lastRound, setLastRound] = useState(null)
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
     useEffect(() => {
         setLoading(true);
         fetch("https://ergast.com/api/f1/current/driverStandings.json")
         .then(res => {
-            if (res.status === 404) {
-				// describe 404 error in error state
-				// setError(
-					// 'Server Error, please try again later'
-				// );
+            if (res.status === 502) {
+				setError(
+					'Server Error, please try again later'
+				);
 				setLoading(false);
 				return;
             } else if (res.status === 200) {
@@ -31,6 +31,9 @@ const CurrentStanding = () => {
     return (
         <div className='current-standing'>
             {loading && 'Loading results...'}
+            {error &&
+            <h2>{error}</h2>
+            }
             {currentStanding && 
                 <>
                     <h2>Current Drivers' Standing as of Round {lastRound}</h2>

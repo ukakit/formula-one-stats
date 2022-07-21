@@ -1,6 +1,5 @@
 import logo from "./logo.svg"
 import { Route, Routes } from "react-router-dom"
-
 import "./fonts/Formula1-Regular.ttf"
 
 import Container from 'react-bootstrap/Container';
@@ -18,6 +17,7 @@ import PreviousConstructorChampion from "./components/PreviousConstructorChampio
 function App() {
   return (
     <div className="App">
+      {/* Nav bar that will stay on top of the page at all times. Made using React Bootstrap*/}
       <Navbar bg="light" expand="lg">
         <Container>
           <Navbar.Brand href="/"><img alt='f1-logo' src={logo}></img></Navbar.Brand>
@@ -32,6 +32,7 @@ function App() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      {/* container for the contents displayed on various pages throughout the website */}
       <main className='main-container'>
         <Routes>
           <Route path="/" element={<Home/>} />
@@ -41,6 +42,7 @@ function App() {
           <Route path="/constructors-champion" element={<PreviousConstructorChampion />} />
         </Routes>
       </main>
+      {/* Footer that will remain on each page. Made using MUI Library*/}
       <Navbar bg="light" expand="lg" fixed="bottom" as="footer">
         <Container>
             <Nav className="me-auto">

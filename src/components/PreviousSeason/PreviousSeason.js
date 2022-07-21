@@ -12,13 +12,17 @@ const PreviousSeason = () => {
     const [loading, setLoading] = useState(false);
     const [listOfSeasons, setListOfSeasons] = useState([])
     const [listOfRaces, setListOfRaces] = useState([])
-
-
+    const [seasonError, setSeasonError] = useState(null);
+    const [roundError, setRoundError] = useState(null);
+    // API call to get list of seasons
     useEffect(()=> {
         setLoading(true)
         fetch("https://ergast.com/api/f1/seasons.json?limit=200")
         .then(res => {
-            if (res.status === 404) {
+            if (res.status === 502) {
+                setSeasonError(
+					'Server Error, please try again later'
+				);
                 setLoading(false)
                 return;
             } else if (res.status === 200) {
@@ -31,10 +35,14 @@ const PreviousSeason = () => {
         .catch(console.error);
     
     }, [])
+    // API call to get all race results from specified season
     useEffect(()=> {
             fetch(`https://ergast.com/api/f1/${seasonsDropdownValue}.json`)
             .then(res => {
-                if (res.status === 404) {
+                if (res.status === 502) {
+                    setRoundError(
+                        'Server Error, please try again later'
+                    );
                     return;
                 } else if (res.status === 200) {
                     return res.json();
@@ -54,8 +62,12 @@ const PreviousSeason = () => {
                     </Spinner>
                 </>
             }
+            {/* using MUI, a dropdown and auto complete field is used to give user choices to see results of a specific race */}
             <Box sx={{"display":"flex", flexDirection: "column", alignItems:"center"}}>
                 <h2 className="header">Previous Season Race Results Inquiry</h2>
+                {seasonError ?
+                <h2>{seasonError}</h2>
+                :
                 <Autocomplete
                     disablePortal
                     options={listOfSeasons}
@@ -65,6 +77,10 @@ const PreviousSeason = () => {
                     }}
                     renderInput={(params) => <TextField {...params} label="Season" />}
                 />
+                }
+                {roundError ?
+                <h2>{roundError}</h2>
+                :
                 <Autocomplete
                     disablePortal
                     options={listOfRaces}
@@ -74,8 +90,9 @@ const PreviousSeason = () => {
                     }}
                     renderInput={(params) => <TextField {...params} label="Race" />}
                 />
+                }
             </Box>
-
+            {/* the value selected in round number is passed onto component to render the detail of the race */}
             {seasonsDropdownValue &&
                 <RaceResultDetail season={seasonsDropdownValue} round={racesDropdownValue} />
             }

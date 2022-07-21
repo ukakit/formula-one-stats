@@ -1,5 +1,8 @@
 # F1 Stats
 
+## Description
+F1 Stats is an app aimed to provide fans with results from current season and previous seasons of F1. The user can look through each race to see the final result. The goal is to provide the user a one-stop experience to browse the information they wish to inquire.
+
 ## Screenshots of the App
 ![Screen Shot 2022-07-20 at 10 28 08 PM](https://user-images.githubusercontent.com/106052696/180136764-ee98aa34-0b9a-43b9-8100-19b12e02e43f.png)
 ![Screen Shot 2022-07-20 at 10 29 05 PM](https://user-images.githubusercontent.com/106052696/180136773-cd5dae66-fdee-4b56-b248-e397515bc035.png)
